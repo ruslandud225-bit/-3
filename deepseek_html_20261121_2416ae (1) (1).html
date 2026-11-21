@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Кто ты из аниме «Любовь с иголочки»?</title>
+<style>
+  :root {
+    --pink: #ff8fb1;
+    --pink-dark: #e05b85;
+    --pink-light: #ffe4ec;
+    --purple: #b39ddb;
+    --text: #3a2c33;
+    --bg: #fff5f8;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', 'Trebuchet MS', sans-serif;
+    background: linear-gradient(135deg, #ffe4ec 0%, #e8dff5 100%);
+    min-height: 100vh;
+    color: var(--text);
+    display: flex;
+    justify-content: center;
+    padding: 24px 16px;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 680px;
+    background: #fff;
+    border-radius: 24px;
+    box-shadow: 0 12px 40px rgba(224, 91, 133, 0.25);
+    overflow: hidden;
+    align-self: flex-start;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--pink) 0%, var(--purple) 100%);
+    color: #fff;
+    padding: 32px 24px;
+    text-align: center;
+  }
+
+  header h1 {
+    font-size: 1.6rem;
+    line-height: 1.3;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  }
+
+  header p {
+    margin-top: 8px;
+    font-size: 0.95rem;
+    opacity: 0.95;
+  }
+
+  .progress-wrap {
+    height: 8px;
+    background: var(--pink-light);
+    width: 100%;
+  }
+
+  .progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--pink), var(--purple));
+    transition: width 0.35s ease;
+  }
+
+  main { padding: 28px 24px 36px; }
+
+  .question {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    line-height: 1.4;
+  }
+
+  .question-count {
+    font-size: 0.85rem;
+    color: var(--pink-dark);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+  }
+
+  .options { display: flex; flex-direction: column; gap: 12px; }
+
+  .option {
+    text-align: left;
+    padding: 16px 18px;
+    border: 2px solid var(--pink-light);
+    border-radius: 14px;
+    background: #fff;
+    font-size: 1rem;
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    line-height: 1.4;
+    font-family: inherit;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .option:hover {
+    border-color: var(--pink);
+    background: var(--pink-light);
+    transform: translateX(4px);
+  }
+
+  .option .letter {
+    flex-shrink: 0;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--pink-light);
+    color: var(--pink-dark);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+  }
+
+  .option:hover .letter {
+    background: var(--pink);
+    color: #fff;
+  }
+
+  /* Результат */
+  .result { text-align: center; display: none; }
+
+  .result.show { display: block; animation: fadeIn 0.5s ease; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .result-emoji {
+    font-size: 4rem;
+    margin-bottom: 12px;
+  }
+
+  .result-name {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--pink-dark);
+    margin-bottom: 16px;
+  }
+
+  .result-desc {
+    font-size: 1rem;
+    line-height: 1.65;
+    text-align: left;
+    background: var(--bg);
+    padding: 20px;
+    border-radius: 16px;
+    border-left: 4px solid var(--pink);
+  }
+
+  .result-score {
+    margin-top: 16px;
+    font-size: 0.9rem;
+    color: #8a7a82;
+  }
+
+  .btn {
+    margin-top: 24px;
+    padding: 14px 32px;
+    border: none;
+    border-radius: 50px;
+    background: linear-gradient(135deg, var(--pink) 0%, var(--pink-dark) 100%);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    font-family: inherit;
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(224, 91, 133, 0.4);
+  }
+
+  .btn:active { transform: translateY(0); }
+
+  footer {
+    text-align: center;
+    padding: 16px;
+    font-size: 0.8rem;
+    color: #a8949c;
+    background: var(--bg);
+  }
+
+  @media (max-width: 480px) {
+    header h1 { font-size: 1.3rem; }
+    main { padding: 22px 18px 30px; }
+    .question { font-size: 1.05rem; }
+    .option { font-size: 0.95rem; padding: 14px; }
+    .result-name { font-size: 1.35rem; }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🎀 Кто ты из аниме «Любовь с иголочки»?</h1>
+      <p>Отвечай честно — и узнаешь своего персонажа!</p>
+    </header>
+
+    <div class="progress-wrap">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <main>
+      <section id="quizSection">
+        <div class="question-count" id="questionCount"></div>
+        <div class="question" id="questionText"></div>
+        <div class="options" id="optionsContainer"></div>
+      </section>
+
+      <section class="result" id="resultSection">
+        <div class="result-emoji" id="resultEmoji"></div>
+        <div class="result-name" id="resultName"></div>
+        <div class="result-desc" id="resultDesc"></div>
+        <div class="result-score" id="resultScore"></div>
+        <button class="btn" onclick="restartQuiz()">Пройти заново 🔁</button>
+      </section>
+    </main>
+
+    <footer>Фан-тест · не является официальным продуктом</footer>
+  </div>
+
+<script>
+  // Данные теста
+  const questions = [
+    {
+      text: "Твое хобби — это...",
+      options: [
+        { letter: "А", text: "Косплей, видеоигры и всё, что связано с аниме. Я не стесняюсь своих увлечений!", type: "A" },
+        { letter: "Б", text: "Что-то спокойное и традиционное. Например, рукоделие или создание кукол.", type: "B" },
+        { letter: "В", text: "Фотография или монтаж видео. Я предпочитаю оставаться за кадром.", type: "C" },
+        { letter: "Г", text: "Тусовки с друзьями, караоке и веселое времяпрепровождение.", type: "D" }
+      ]
+    },
+    {
+      text: "Как ты обычно ведешь себя в новой компании?",
+      options: [
+        { letter: "А", text: "Сразу оказываюсь в центре внимания и завожу новых друзей.", type: "A" },
+        { letter: "Б", text: "Держусь в стороне и наблюдаю, пока не почувствую себя комфортно.", type: "B" },
+        { letter: "В", text: "Ищу человека, с которым можно поговорить о своих интересах.", type: "C" },
+        { letter: "Г", text: "Легко общаюсь со всеми, но предпочитаю легкие и непринужденные темы.", type: "D" }
+      ]
+    },
+    {
+      text: "Тебя критикуют за твое увлечение. Твоя реакция?",
+      options: [
+        { letter: "А", text: "Открыто защищаю свое хобби. Каждый имеет право любить то, что ему нравится!", type: "A" },
+        { letter: "Б", text: "Мне становится очень обидно, и я надолго замыкаюсь в себе.", type: "B" },
+        { letter: "В", text: "Внешне сохраняю спокойствие, но внутри переживаю.", type: "C" },
+        { letter: "Г", text: "Пожимаю плечами. У каждого свои странности, и это нормально.", type: "D" }
+      ]
+    },
+    {
+      text: "Что для тебя важнее всего в работе над общим делом?",
+      options: [
+        { letter: "А", text: "Энтузиазм и желание сделать что-то крутое, даже если не хватает навыков.", type: "A" },
+        { letter: "Б", text: "Идеальный результат. Я перфекционист и не терплю халтуры.", type: "B" },
+        { letter: "В", text: "Тщательная подготовка и внимание к деталям.", type: "C" },
+        { letter: "Г", text: "Хорошая атмосфера в команде и удовольствие от процесса.", type: "D" }
+      ]
+    },
+    {
+      text: "Как ты относишься к своей внешности?",
+      options: [
+        { letter: "А", text: "Люблю выделяться и выглядеть ярко.", type: "A" },
+        { letter: "Б", text: "Часто стесняюсь своей внешности, особенно в контексте своих увлечений.", type: "B" },
+        { letter: "В", text: "У меня есть комплексы по поводу того, что я выгляжу младше/старше своих лет.", type: "C" },
+        { letter: "Г", text: "В целом всё устраивает, я не зацикливаюсь на этом.", type: "D" }
+      ]
+    },
+    {
+      text: "Твой друг просит о помощи, но ты очень занят. Что ты сделаешь?",
+      options: [
+        { letter: "А", text: "Брошу все свои дела и помчусь на помощь!", type: "A" },
+        { letter: "Б", text: "Помогу, даже если для этого придется не спать всю ночь.", type: "B" },
+        { letter: "В", text: "Помогу, но предварительно составлю четкий план и распределю время.", type: "C" },
+        { letter: "Г", text: "Постараюсь помочь, но сначала уточню, насколько это срочно.", type: "D" }
+      ]
+    },
+    {
+      text: "Какое утверждение тебе ближе?",
+      options: [
+        { letter: "А", text: "«Делай то, что любишь, и не обращай внимания на мнение других!»", type: "A" },
+        { letter: "Б", text: "«Настоящее мастерство требует времени, терпения и дисциплины».", type: "B" },
+        { letter: "В", text: "«Лучше быть незаметным, но полезным, чем быть в центре внимания».", type: "C" },
+        { letter: "Г", text: "«Главное — чтобы было весело и никто не ссорился».", type: "D" }
+      ]
+    },
+    {
+      text: "Что бы ты выбрал(а) в качестве подарка для близкого человека?",
+      options: [
+        { letter: "А", text: "Что-то связанное с его/ее хобби, даже если это кажется странным.", type: "A" },
+        { letter: "Б", text: "Вещь, сделанную своими руками, в которую вложена душа.", type: "B" },
+        { letter: "В", text: "Что-то практичное и продуманное до мелочей.", type: "C" },
+        { letter: "Г", text: "Сертификат на совместное развлечение (например, поход в караоке).", type: "D" }
+      ]
+    }
+  ];
+
+  // Результаты по типам
+  const results = {
+    A: {
+      emoji: "💖",
+      name: "Марин Китагава",
+      desc: "Ты — Марин Китагава! Энергичная, жизнерадостная и невероятно искренняя. Ты — открытый отаку, который не боится показать свою любовь к аниме, косплею и видеоиграм. Ты легко заводишь друзей и заражаешь всех вокруг своим энтузиазмом. Под твоей яркой внешностью гяру скрывается очень добрая и немного ранимая душа, которая очень трепетно относится к своим чувствам и переживает, когда дело доходит до настоящей романтики. Ты всегда готова поддержать друзей и защитить то, что тебе дорого."
+    },
+    B: {
+      emoji: "🪡",
+      name: "Вакана Годзё",
+      desc: "Ты — Вакана Годзё! Скромный, застенчивый и невероятно талантливый. Ты — настоящий мастер своего дела, будь то шитье, готовка или что-то другое. Ты очень ответственный и преданный, готов(а) работать всю ночь, чтобы выполнить обещание. Из-за прошлого опыта ты можешь быть замкнутым и неуверенным в себе, но в глубине души ты очень добрый и чуткий человек. Твое увлечение может казаться окружающим необычным, но для тебя это дело всей жизни, и ты обладаешь тихой смелостью, чтобы следовать своему пути."
+    },
+    C: {
+      emoji: "📸",
+      name: "Синдзю Инуй",
+      desc: "Ты — Синдзю Инуй! Прирожденный перфекционист и человек «за кадром». Ты предпочитаешь, чтобы твоя работа говорила сама за себя. Ты можешь казаться холодным(ой) и отстраненным(ой), но на самом деле ты очень преданный(ая) друг и готов(а) на многое ради тех, кого любишь. Ты тщательно планируешь каждый шаг и не терпишь халтуры. Ты можешь испытывать социальную тревогу или неуверенность в своей внешности, но твоя тихая решимость и поддержка близких помогают тебе справляться с этим."
+    },
+    D: {
+      emoji: "🎤",
+      name: "Нова Сугая",
+      desc: "Ты — Нова Сугая! Легкая на подъем, общительная и неконфликтная. Ты — «социальная бабочка», которая легко находит общий язык с самыми разными людьми. Ты предпочитаешь избегать драмы и поддерживать в компании веселую и непринужденную атмосферу. У тебя нет всепоглощающих страстей, как у других, но твоя доброта, неосуждение и умение просто быть рядом делают тебя незаменимым другом. Ты — та самая опора, которая нормализует «странности» окружающих и создает безопасное пространство для всех."
+    }
+  };
+
+  // Состояние теста
+  let currentQuestion = 0;
+  let scores = { A: 0, B: 0, C: 0, D: 0 };
+
+  const quizSection = document.getElementById("quizSection");
+  const resultSection = document.getElementById("resultSection");
+  const questionCount = document.getElementById("questionCount");
+  const questionText = document.getElementById("questionText");
+  const optionsContainer = document.getElementById("optionsContainer");
+  const progressBar = document.getElementById("progressBar");
+
+  function renderQuestion() {
+    const q = questions[currentQuestion];
+    questionCount.textContent = `Вопрос ${currentQuestion + 1} из ${questions.length}`;
+    questionText.textContent = q.text;
+    progressBar.style.width = `${(currentQuestion / questions.length) * 100}%`;
+    optionsContainer.innerHTML = "";
+
+    q.options.forEach(opt => {
+      const btn = document.createElement("button");
+      btn.className = "option";
+      btn.innerHTML = `<span class="letter">${opt.letter}</span><span>${opt.text}</span>`;
+      btn.addEventListener("click", () => selectAnswer(opt.type));
+      optionsContainer.appendChild(btn);
+    });
+  }
+
+  function selectAnswer(type) {
+    scores[type]++;
+    currentQuestion++;
+    if (currentQuestion < questions.length) {
+      renderQuestion();
+    } else {
+      showResult();
+    }
+  }
+
+  function showResult() {
+    progressBar.style.width = "100%";
+    quizSection.style.display = "none";
+    resultSection.classList.add("show");
+
+    // Определяем победителя (максимум голосов, при равенстве — приоритет A>B>C>D)
+    let winner = "A";
+    let max = -1;
+    ["A", "B", "C", "D"].forEach(key => {
+      if (scores[key] > max) {
+        max = scores[key];
+        winner = key;
+      }
+    });
+
+    const res = results[winner];
+    document.getElementById("resultEmoji").textContent = res.emoji;
+    document.getElementById("resultName").textContent = res.name;
+    document.getElementById("resultDesc").textContent = res.desc;
+
+    const total = questions.length;
+    document.getElementById("resultScore").textContent =
+      `Твой результат: ${max} из ${total} совпадений по типу «${res.name}».`;
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function restartQuiz() {
+    currentQuestion = 0;
+    scores = { A: 0, B: 0, C: 0, D: 0 };
+    resultSection.classList.remove("show");
+    quizSection.style.display = "block";
+    progressBar.style.width = "0%";
+    renderQuestion();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  // Старт
+  renderQuestion();
+</script>
+</body>
+</html>
